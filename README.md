@@ -1,22 +1,18 @@
-Create an Azure Service Bus and Storage Queue
+Create an Azure WebJob
 =
-In this exercise, we will be creating two of the most popular services used in background task architecture. In order to execute the bellow instructions, you only need to run commands\Configs\config.ps1. All the resources will automatically be deployed for you.
+In this project, we'll create an Azure web app resource then we will set up a Triggered WebJob for the web app that will fetch the Azure Announcements RSS feed every 30 sec and store the 5 newest announcements to later display to the user.
 
-## Service Bus
-1. Create a Resource Group
-2. Create An Azure Service Bus
-    - Pricing Tier: Basic
-    - Create an Azure Service Bus Queue
-    - Queue Name: reviewqueue
-3. Find and locate your Service Bus namespace primary connection string.
+Unfortunally I was not able to run successfully the command **az webapp webjob triggered run**. If you can help me on that... ;-)
 
-## Storage Queue
-1. Create an Azure Storage Account in the same resource group:
-    - Performance: Standard
-    - Replication: Locally Redundant
-    - Networking: all networks allowed
-2. Create an Azure Storage Queue
-    - Name: orderqueue
-    - Find and locate your storage connection string
+1. Create an Azure Web App:
+    - OS: Windows OS
+    - Runtime: .Net 4.7 or higher
+    - Pricing Tier: Free tier app service plan
+2. Upload the web job to the Azure Web App
+    - The web job zip file is located: in webjob\AzureAnnouncer.zip
+    - This background task fetched the Azure Announcements RSS feed every 30 sec then store the 5 newest announcements to later display to the user
+    - Web Job Type: Triggered
+    - Triggers: Scheduled
+    - CRON Expression: 0/30 * * * * *
 
-Cleanup and delete resources
+Be sure to clean up and delete resources to avoid recurring charges

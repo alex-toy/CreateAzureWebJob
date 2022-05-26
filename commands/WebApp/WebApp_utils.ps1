@@ -1,20 +1,20 @@
 ################################################################
 # Find the outbound IP addresses currently used by your app :
 
-az webapp show \
-    --resource-group $RGName \
-    --name $WAName \ 
-    --query outboundIpAddresses \
+az webapp show `
+    --resource-group $RGName `
+    --name $WAName `
+    --query outboundIpAddresses `
     --output tsv
 
 
 ################################################################
 # Find all possible outbound IP addresses for your app, regardless of pricing tiers :
 
-az webapp show \
-    --resource-group $RGName \ 
-    --name $WAName \ 
-    --query possibleOutboundIpAddresses \
+az webapp show `
+    --resource-group $RGName `
+    --name $WAName `
+    --query possibleOutboundIpAddresses `
     --output tsv
 
 
@@ -52,3 +52,6 @@ https://<app-name>.scm.azurewebsites.net/api/dump
 # az webapp up `
 #     --name $WebAppName `
 #     --verbose
+
+az webapp list-runtimes --os "linux"
+az webapp list-runtimes --os-type windows

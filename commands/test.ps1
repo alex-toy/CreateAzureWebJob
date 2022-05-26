@@ -1,14 +1,6 @@
-
-
-
-az storage queue create `
-    --name alexeistoragequeue `
-    --account-name $SAName 
-    [--account-key]
-    [--auth-mode {key, login}]
-    [--connection-string]
-    [--fail-on-exist]
-    [--metadata]
-    [--queue-endpoint]
-    [--sas-token]
-    [--timeout]
+az webapp webjob triggered run `
+    --resource-group $RGName `
+    --name $WAName `
+    --webjob-name MyWebjob
+    # [--ids]
+    # [--slot]

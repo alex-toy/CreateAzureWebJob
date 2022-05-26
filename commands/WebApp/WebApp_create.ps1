@@ -4,37 +4,69 @@
 
 
 ################################################################
-"Web App :"
+"Create Web App :"
 
 $Global:WAName = "alexeiwa"
-"Web app name : " + $WAName
-
 $Global:WALocation = $RGLocation
-"Web App location : " + $WALocation
-
-$Global:SKU = "F1"
-"SKU : " + $SKU
-
+# Linux Windows
+$Global:WAOSType = "Windows"
+# Replace | with : when entering the runtime stack!!!
+$Global:WARuntime = "aspnet:V4.8"
+$Global:ASPName = "alexeiasp"
 
 
 ################################################################
-"CREATE AND DEPLOY AN APP SERVICE :"
+"CREATE AN APP SERVICE PLAN :"
 
-#cd to web directory
-$init_path = $pwd
-$app_path = ".\client"
-Set-Location $app_path
-
-az webapp up `
+az appservice plan create `
     --resource-group $RGName `
-    --location $WALocation `
+    --name $ASPName `
+    --sku F1
+    # [--app-service-environment]
+    # [--hyper-v]
+    # [--is-linux]
+    # [--location]
+    # [--no-wait]
+    # [--number-of-workers]
+    # [--per-site-scaling]
+    # [--sku {B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED, WS1, WS2, WS3}]
+    # [--tags]
+    # [--zone-redundant]
+
+
+################################################################
+"CREATE A WEBAPP :"
+
+az webapp create `
+    --resource-group $RGName `
+    --plan $ASPName `
     --name $WAName `
-    --sku $SKU `
-    --verbose
+    --runtime $WARuntime 
+    # [--assign-identity]
+    # [--deployment-container-image-name]
+    # [--deployment-local-git]
+    # [--deployment-source-branch]
+    # [--deployment-source-url]
+    # [--docker-registry-server-password]
+    # [--docker-registry-server-user]
+    # [--https-only {false, true}]
+    # [--multicontainer-config-file]
+    # [--multicontainer-config-type {COMPOSE, KUBE}]
+    # [--role]
+    # [--runtime]
+    # [--scope]
+    # [--startup-file]
+    # [--subnet]
+    # [--tags]
+    # [--vnet]
 
-#Go back to root folder
-Set-Location $init_path
 
-#Open a browser and navigate to the app URL (http://<myAppName>.azurewebsites.net) and verify the app is running
-$url = "http://" + $WAName + ".azurewebsites.net"
-$url
+################################################################
+"CREATE A WEBJOB :"
+
+# az webapp webjob triggered run `
+#     --resource-group $RGName `
+#     --name $WAName `
+#     --webjob-name MyWebjob
+
+
